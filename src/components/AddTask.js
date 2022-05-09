@@ -1,20 +1,23 @@
 import React, { useState } from 'react'
+import { v4 as uuid4 } from 'uuid'
 
-const AddTask = ({ onSave }) => {
+const AddTask = ({ addTodo }) => {
   const [text, setText] = useState('')
-  const [desc, setDesc] = useState('')
 
   const onSubmit = (e) => {
     e.preventDefault()
 
-    if (!text && !desc) {
-      alert('please fill text and desc')
-    } else if (text && desc) {
-      onSave({ text, desc })
+    if (text === '') {
+      alert('Please enter the text.')
+      return;
     }
 
+    const todo = {
+      id: uuid4(),
+      text: text
+    }
+    addTodo(todo)
     setText('')
-    setDesc('')
   }
 
   return (
@@ -22,9 +25,7 @@ const AddTask = ({ onSave }) => {
       <div className="form-control">
         <input type="text" placeholder='add task' value={text} onChange={(e) => setText(e.target.value)} />
       </div>
-      <div className="form-control">
-        <input type="text" placeholder="desc " value={desc} onChange={(e) => setDesc(e.target.value)} />
-      </div>
+
       <input type="submit" className="btn btn-block" value="Save Task" />
     </form>
   )
