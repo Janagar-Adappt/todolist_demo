@@ -17,7 +17,7 @@ const App = () => {
 
   const [pageNumber, setPageNumber] = useState(0);
 
-  const usersPerPage = 6;
+  const usersPerPage = 5;
   const pagesVisited = pageNumber * usersPerPage;
 
   const pageCount = Math.ceil(tasks.length / usersPerPage);
