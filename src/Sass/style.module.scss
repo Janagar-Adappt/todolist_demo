@@ -1,0 +1,118 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;500&display=swap");
+
+@import "./base";
+@import "./variables";
+
+.container {
+  width: 40%;
+  min-width: 450px;
+  position: absolute;
+  transform: translate(-50%, -50%);
+  top: 50%;
+  left: 50%;
+  padding: 30px 40px;
+  .newTask {
+    position: relative;
+    background-color: $newTask;
+    padding: 30px 20px;
+    border-radius: 5px;
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
+    input {
+      width: 70%;
+      @extend %input-shared;
+    }
+    input:focus {
+      outline: none;
+      border-color: $borderColor;
+    }
+    button {
+      position: relative;
+      margin: 15px;
+      width: 20%;
+      height: 45px;
+      font-family: "Poppins", sans-serif;
+      font-weight: 500;
+      font-size: 16px;
+      @extend %button-shared;
+    }
+    button:hover {
+      background-color: $borderColor;
+    }
+  }
+  .tasks {
+    background-color: $newTask;
+    padding: 30px 20px;
+    margin-top: 60px;
+    border-radius: 10px;
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
+    width: 100%;
+    position: relative;
+    .searchTask {
+      input {
+        width: 90%;
+        @extend %input-shared;
+      }
+      input:focus {
+        outline: none;
+        border-color: $primary-color;
+      }
+    }
+    .task {
+      background-color: $newTask;
+      height: 50px;
+      padding: 5px 10px;
+      margin-top: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-bottom: 2px solid $inputBorder;
+      cursor: pointer;
+      span {
+        font-family: "Poppins", sans-serif;
+        font-size: 16px;
+        font-weight: 500;
+      }
+      button {
+        @extend %button-shared;
+        height: 100%;
+        width: 40px;
+        margin: 5px;
+        padding: 5px;
+      }
+      button:hover {
+        background: $primary-color;
+      }
+    }
+  }
+  .paginationBttns {
+    width: 80%;
+    height: 30px;
+    list-style: none;
+    display: flex;
+    justify-content: center;
+    margin-top: 25px;
+  }
+
+  .paginationBttns a {
+    padding: 10px;
+    margin: 8px;
+    border-radius: 5px;
+    color: $primary-color;
+    cursor: pointer;
+  }
+
+  .paginationBttns a:hover {
+    color: $newTask;
+    background-color: $primary-color;
+  }
+
+  .paginationActive a {
+    color: $newTask;
+    background-color: $primary-color;
+  }
+
+  .paginationDisabled a {
+    color: #3e3d3d;
+    background-color: $button;
+  }
+}

@@ -1,10 +1,9 @@
 import React, { useState, useEffect } from 'react'
 import { v4 as uuid4 } from 'uuid'
 import ReactPaginate from "react-paginate";
-import Header from './components/Header'
 import AddTask from './components/AddTask'
-import Tasks from './components/Tasks'
-import './index.css';
+import Tasks from './components/TaskList'
+import styles from './Sass/style.module.scss'
 
 const App = () => {
 
@@ -15,11 +14,10 @@ const App = () => {
   ];
 
   const [tasks, setTasks] = useState(todosList) //task state
-  const [showAddTask, setShowAddTask] = useState(false)
 
   const [pageNumber, setPageNumber] = useState(0);
 
-  const usersPerPage = 5;
+  const usersPerPage = 6;
   const pagesVisited = pageNumber * usersPerPage;
 
   const pageCount = Math.ceil(tasks.length / usersPerPage);
@@ -29,9 +27,9 @@ const App = () => {
   };
 
   // Fetching from Local Storage
-  const getTasks = JSON.parse(localStorage.getItem("taskAdded"));
 
   useEffect(() => {
+    const getTasks = JSON.parse(localStorage.getItem("taskAdded"));
     if (getTasks == null) {
       setTasks([])
     } else {
@@ -61,7 +59,10 @@ const App = () => {
 
   const editTask = (id) => {
 
-    const text = prompt("Task Name")
+    let text;
+    do {
+      text = prompt("Give input");
+    } while (text === null || text === "");
     let data = JSON.parse(localStorage.getItem('taskAdded'));
 
     const myData = data.map(item => {
@@ -95,27 +96,27 @@ const App = () => {
   };
 
   return (
-    <div className="container">
-      <Header showForm={() => setShowAddTask(!showAddTask)} changeTextColor={showAddTask} />
-      {showAddTask && <AddTask addTodo={addTask} />}
+    <div className={styles.container}>
+      <AddTask addTodo={addTask} />
 
-      {
-        tasks.length > 0
-          ?
-          (<Tasks todos={tasks} pagesVisited={pagesVisited} usersPerPage={usersPerPage} deleteTask={deleteTask} editTask={editTask} toggleTask={toggleTask} />)
-          :
-          ('No Task Found!')
-      }
-      <ReactPaginate
-        previousLabel={"Previous"}
-        nextLabel={"Next"}
-        pageCount={pageCount}
-        onPageChange={changePage}
-        containerClassName={"paginationBttns"}
-        previousLinkClassName={"previousBttn"}
-        nextLinkClassName={"nextBttn"}
-        disabledClassName={"paginationDisabled"}
-        activeClassName={"paginationActive"} />
+      <div className={styles.tasks}>
+        {
+          tasks.length > 0
+            ?
+            <><Tasks tasks={tasks} pagesVisited={pagesVisited} usersPerPage={usersPerPage} deleteTask={deleteTask} editTask={editTask} toggleTask={toggleTask} /><ReactPaginate
+              previousLabel={"Previous"}
+              nextLabel={"Next"}
+              pageCount={pageCount}
+              onPageChange={changePage}
+              containerClassName={styles.paginationBttns}
+              previousLinkClassName={"previousBttn"}
+              nextLinkClassName={"nextBttn"}
+              disabledClassName={styles.paginationDisabled}
+              activeClassName={styles.paginationActive} /></>
+            :
+            ('No Task Found!')
+        }
+      </div>
     </div>
   )
 }

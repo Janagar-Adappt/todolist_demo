@@ -1,11 +1,12 @@
 import React, { useState } from 'react'
 import { v4 as uuid4 } from 'uuid'
+import styles from '../Sass/style.module.scss'
 
 const AddTask = ({ addTodo }) => {
   const [text, setText] = useState('')
 
   const onSubmit = (e) => {
-    e.preventDefault()
+    e.preventDefault();
 
     if (text === '') {
       alert('Please enter the text.')
@@ -20,14 +21,14 @@ const AddTask = ({ addTodo }) => {
     setText('')
   }
 
-  return (
-    <form className="add-form" onSubmit={onSubmit}>
-      <div className="form-control">
-        <input type="text" placeholder='add task' value={text} onChange={(e) => setText(e.target.value)} />
-      </div>
 
-      <input type="submit" className="btn btn-block" value="Save Task" />
+  return (
+
+    <form className={styles.newTask} onSubmit={onSubmit}>
+      <input type="text" placeholder="What's the Plan for Today" value={text} onChange={(e) => setText(e.target.value)} />
+      <button className='submit'>Add</button>
     </form>
+
   )
 }
 
