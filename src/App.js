@@ -8,7 +8,7 @@ import styles from './Sass/style.module.scss'
 const App = () => {
 
   const todosList = [
-    { id: 1, text: 'Buy eggs' },
+    { id: 1, text: 'Buy Chocos' },
     { id: 2, text: 'Walk' },
     { id: 3, text: 'Watch a movie' }
   ];
@@ -49,8 +49,10 @@ const App = () => {
   // Delete task
 
   const deleteTask = (id) => {
-    const deleteTask = tasks.filter((task) => task.id !== id);
-    setTasks(deleteTask);
+    if (window.confirm('Are you sure to delete this item?')) {
+      const deleteTask = tasks.filter((task) => task.id !== id);
+      setTasks(deleteTask);
+    }
 
     localStorage.setItem("taskAdded", JSON.stringify(deleteTask));
   }
@@ -114,7 +116,7 @@ const App = () => {
               disabledClassName={styles.paginationDisabled}
               activeClassName={styles.paginationActive} /></>
             :
-            ('No Task Found!')
+            ('No search result found')
         }
       </div>
     </div>

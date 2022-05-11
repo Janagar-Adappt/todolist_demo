@@ -18,7 +18,7 @@ const Tasks = ({ tasks, pagesVisited, usersPerPage, deleteTask, editTask, toggle
               <span onClick={() => toggleTask(task.id)} style={{ 'textDecoration': task.completed ? 'line-through' : 'none' }}> {task.text} </span>
             </p>
           </div>
-          <div>
+          <div >
             <button onClick={() => deleteTask(task.id)}><BsTrash className="delIcon" /></button>
             <button onClick={() => editTask(task.id)}><AiFillEdit className="editIcon" /></button>
           </div>
